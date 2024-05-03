@@ -1,3 +1,5 @@
+import 'package:blog_app/core/theme/theme.dart';
+import 'package:blog_app/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,18 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Blog App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            "Blog App",
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.darkThemeMode,
+      home: const SignUpPage(),
     );
   }
 }
