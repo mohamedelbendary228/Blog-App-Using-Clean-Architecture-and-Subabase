@@ -31,6 +31,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   void onChange(Change<AuthState> change) {
-    print("AuthBloc ---> $change");
+    print("AuthBloc $change");
   }
 }
