@@ -78,9 +78,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                       ),
                     )
                   : GestureDetector(
-                      onTap: () {
-                        selectImage();
-                      },
+                      onTap: selectImage,
                       child: DottedBorder(
                         color: AppColors.borderColor,
                         dashPattern: const [10, 4],
