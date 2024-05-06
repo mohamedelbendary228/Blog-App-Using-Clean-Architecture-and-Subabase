@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BlogTextField extends StatelessWidget {
+class AddBlogTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
 
-  const BlogTextField({
+  const AddBlogTextField({
     super.key,
     required this.controller,
     required this.hintText,
