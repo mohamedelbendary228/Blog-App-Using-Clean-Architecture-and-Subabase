@@ -25,7 +25,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this.supabaseClient);
 
   @override
-  Session? get currentUseSession => supabaseClient.auth.currentSession;
+  Session? get currentUseSession =>
+      supabaseClient.auth.currentSession; // exist in Locale Storage
 
   @override
   Future<UserModel> loginWithEmailAndPassword({
@@ -60,7 +61,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           'name': name,
         },
       );
-
       if (response.user == null) {
         throw const ServerException("User in null!");
       }

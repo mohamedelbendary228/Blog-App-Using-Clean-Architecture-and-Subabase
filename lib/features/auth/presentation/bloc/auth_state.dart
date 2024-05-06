@@ -18,3 +18,15 @@ final class AuthFailureState extends AuthState {
 
   AuthFailureState(this.message);
 }
+
+final class LoginFailureState extends AuthState {
+  final String message;
+
+  LoginFailureState(this.message);
+}
+
+final class SignUpFailureState extends AuthState {
+  final String message;
+
+  SignUpFailureState(this.message);
+}
