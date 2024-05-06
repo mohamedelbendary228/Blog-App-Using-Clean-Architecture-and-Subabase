@@ -13,6 +13,18 @@ final class AuthSuccessState extends AuthState {
   AuthSuccessState(this.user);
 }
 
+final class LoginSuccessState extends AuthState {
+  final User user;
+
+  LoginSuccessState(this.user);
+}
+
+final class SignUpSuccessState extends AuthState {
+  final User user;
+
+  SignUpSuccessState(this.user);
+}
+
 final class AuthFailureState extends AuthState {
   final String message;
 

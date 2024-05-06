@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
           listener: (context, state) {
             if (state is SignUpFailureState) {
               showSnackBar(context, state.message);
-            } else if (state is AuthSuccessState) {
+            } else if (state is SignUpSuccessState) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   AppRoutes.kBlogRoute, (route) => false);
             }

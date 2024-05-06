@@ -21,16 +21,26 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<AppUserCubit, AppUserState, bool>(
-      selector: (state) {
-        return state is UserAuthenticatedState;
-      },
-      builder: (context, isLoggedIn) {
-        if (isLoggedIn) {
+    return BlocBuilder<AppUserCubit, AppUserState>(
+      builder: (context, state) {
+        if (state is AuthenticatedState) {
           return const BlogPage();
+        } else if (state is UnAuthenticatedState) {
+          return const LoginPage();
         }
         return const LoginPage();
       },
     );
+    // return BlocSelector<AppUserCubit, AppUserState, bool>(
+    //   selector: (state) {
+    //     return state is UserAuthenticatedState;
+    //   },
+    //   builder: (context, isLoggedIn) {
+    //     if (isLoggedIn) {
+    //       return const BlogPage();
+    //     }
+    //     return const LoginPage();
+    //   },
+    // );
   }
 }

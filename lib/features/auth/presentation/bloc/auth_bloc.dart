@@ -41,7 +41,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     result.fold(
       (l) => emit(SignUpFailureState(l.message)),
-      (r) => _emitAuthSuccess(r, emit),
+      (user) {
+        _appUserCubit.updateUser(user);
+        emit(SignUpSuccessState(user));
+      },
     );
   }
 
@@ -52,7 +55,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     result.fold(
       (l) => emit(LoginFailureState(l.message)),
-      (r) => _emitAuthSuccess(r, emit),
+      (user) {
+        _appUserCubit.updateUser(user);
+        emit(LoginSuccessState(user));
+      },
     );
   }
 
@@ -64,17 +70,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await _currentUserUseCase(NoParams());
     result.fold(
       (l) => emit(AuthFailureState(l.message)),
-      (r) => _emitAuthSuccess(r, emit),
+      (user) {
+        _appUserCubit.updateUser(user);
+        emit(AuthSuccessState(user));
+      },
     );
-  }
-
-  void _emitAuthSuccess(User user, Emitter<AuthState> emit) async {
-    _appUserCubit.updateUser(user);
-    emit(AuthSuccessState(user));
   }
 
   @override
   void onChange(Change<AuthState> change) {
+    super.onChange(change);
     print("AuthBloc $change");
   }
 }
