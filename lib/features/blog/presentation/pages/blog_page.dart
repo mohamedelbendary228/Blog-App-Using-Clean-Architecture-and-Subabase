@@ -10,6 +10,7 @@ class BlogPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Blog App'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -21,7 +22,6 @@ class BlogPage extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }
