@@ -18,6 +18,6 @@ final class UploadBlogEvent extends BlogEvent {
     required this.userId,
     required this.topics,
   });
-
-
 }
+
+final class FetchAllBlogsEvent extends BlogEvent {}

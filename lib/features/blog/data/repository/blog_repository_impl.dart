@@ -40,11 +40,22 @@ class BlogRepositoryImpl implements BlogRepository {
 
       blogModel = blogModel.copyWith(imageUrl: imageUrl);
 
-      final uploadedBlogModel = await blogRemoteDataSource.uploadBlog(blogModel);
+      final uploadedBlogModel =
+          await blogRemoteDataSource.uploadBlog(blogModel);
 
-      return right(uploadedBlogModel);
+      return Right(uploadedBlogModel);
     } on ServerException catch (e) {
-      return left(Failure(e.message));
+      return Left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Blog>>> getAllBlogs() async {
+    try {
+      final blogs = await blogRemoteDataSource.getAllBlogs();
+      return Right(blogs);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
     }
   }
 }

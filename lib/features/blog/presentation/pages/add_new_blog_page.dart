@@ -96,7 +96,6 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
       body: BlocConsumer<BlogBloc, BlogState>(
         bloc: _blogBloc,
         listener: (context, state) {
-          print("listener state $state");
           if (state is BlogFailure) {
             showSnackBar(context, state.error);
           } else if (state is BlogUploadedSuccess) {

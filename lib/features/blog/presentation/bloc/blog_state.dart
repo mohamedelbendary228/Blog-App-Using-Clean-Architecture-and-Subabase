@@ -15,3 +15,8 @@ final class BlogFailure extends BlogState {
 }
 
 final class BlogUploadedSuccess extends BlogState {}
+
+final class BlogsFetchedSuccess extends BlogState {
+  final List<Blog> blogs;
+  BlogsFetchedSuccess(this.blogs);
+}
