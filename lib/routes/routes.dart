@@ -4,4 +4,5 @@ class AppRoutes {
   static const String kSignUpRoute = "/signUp";
   static const String kBlogRoute = "/blog";
   static const String kAddNewBlogRoute = "/add-new-blog";
+  static const String kBLogViewerPageRoute = "/blog-viewer";
 }
