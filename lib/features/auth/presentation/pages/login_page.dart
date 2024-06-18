@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           listener: (context, state) {
             if (state is LoginFailureState) {
               showSnackBar(context, state.message);
+
             } else if (state is LoginSuccessState) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   AppRoutes.kBlogRoute, (route) => false);

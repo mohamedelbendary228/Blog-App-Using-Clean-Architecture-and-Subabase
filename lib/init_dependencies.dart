@@ -6,6 +6,7 @@ import 'package:blog_app/features/auth/data/repository/auth_repository_impl.dart
 import 'package:blog_app/features/auth/domain/usecases/current_user_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/blog/data/datasources/blog_local_data_source.dart';
 import 'package:blog_app/features/blog/data/datasources/blog_remote_data_source.dart';
 import 'package:blog_app/features/blog/data/repository/blog_repository_impl.dart';
 import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart';
@@ -13,7 +14,9 @@ import 'package:blog_app/features/blog/domain/usecases/get_all_blogs_usecase.dar
 import 'package:blog_app/features/blog/domain/usecases/upload_blog_usecase.dart';
 import 'package:blog_app/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'features/auth/domain/repository/auth_repository.dart';
@@ -33,6 +36,11 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton(() => supabase.client);
 
   serviceLocator.registerFactory(() => InternetConnection());
+
+  Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
+
+  serviceLocator.registerLazySingleton(() => Hive.box(name: 'blogs'));
+
   // core
   serviceLocator.registerLazySingleton<AppUserCubit>(() => AppUserCubit());
 
@@ -85,10 +93,16 @@ void _initBlog() {
     ..registerFactory<BlogRemoteDataSource>(
       () => BlogRemoteDataSourceImpl(serviceLocator()),
     )
+    ..registerFactory<BlogLocalDataSource>(
+        () => BlogLocalDataSourceImpl(serviceLocator()))
 
     // Repository
     ..registerFactory<BlogRepository>(
-      () => BlogRepositoryImpl(serviceLocator()),
+      () => BlogRepositoryImpl(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
     )
 
     // UseCase
